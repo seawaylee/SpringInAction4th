@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--自动扫描-->
+    <context:component-scan base-package="chapter02"/>
+
+
+
+
+    <!--依赖注入-->
+    <!--<bean id="student" class="chapter01.StudentObj">-->
+        <!--<constructor-arg ref="arm"/>-->
+    <!--</bean>-->
+    <!--<bean id="arm" class="chapter01.SuperArm"/>-->
+    <!--<bean id="commonUtils" class="chapter01.CommonUtils"/>-->
+
+    <!--&lt;!&ndash;AOP&ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;公共方法作为切面&ndash;&gt;-->
+        <!--<aop:aspect ref="commonUtils">-->
+            <!--&lt;!&ndash;定义切点  其实就是要被切入的函数    定义切点表达式&ndash;&gt;-->
+            <!--<aop:pointcut id="showSomething" expression="execution(* *.insert*(..))" />-->
+            <!--&lt;!&ndash;定义前置通知&ndash;&gt;-->
+            <!--<aop:before pointcut-ref="showSomething" method="beforeInsert"/>-->
+            <!--&lt;!&ndash;定义后置通知&ndash;&gt;-->
+            <!--<aop:after pointcut-ref="showSomething" method="afterInsert"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+
+
+
+</beans>
