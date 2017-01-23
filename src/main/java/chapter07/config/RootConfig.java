@@ -15,12 +15,12 @@ import javax.sql.DataSource;
  * @author NikoBelic
  * @create 09/01/2017 20:30
  */
-@Configuration
-@ComponentScan(basePackages = "chapter07",excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)})
+//@Configuration
+//@ComponentScan(basePackages = "chapter07",excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = EnableWebMvc.class)})
 public class RootConfig
 {
 
-    @Bean
+    //@Bean
     public DataSource dataSource()
     {
         DriverManagerDataSource ds = new DriverManagerDataSource();

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
  * @author NikoBelic
  * @create 26/12/2016 14:07
  */
-@Configuration
-@ComponentScan
+//@Configuration
+//@ComponentScan
 public class CDPlayerConfig
 {
 }

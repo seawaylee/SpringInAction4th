@@ -25,8 +25,8 @@
         <spring-webflow.version>2.4.4.RELEASE</spring-webflow.version>
         <!--Spring Security-->
         <spring-security.version>4.2.1.RELEASE</spring-security.version>
-
-
+        <!--Spring Data-->
+        <spring-mongo.version>1.9.5.RELEASE</spring-mongo.version>
 
 
 
@@ -220,7 +220,12 @@
             <version>${spring-security.version}</version>
         </dependency>
 
-
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>${spring-mongo.version}</version>
+        </dependency>
 
 
 
@@ -351,8 +356,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

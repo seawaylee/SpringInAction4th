@@ -9,9 +9,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @author NikoBelic
  * @create 28/12/2016 19:53
  */
-@Configuration
-@EnableAspectJAutoProxy/*启动AspectJ自动代理*/
-@ComponentScan
+//@Configuration
+//@EnableAspectJAutoProxy/*启动AspectJ自动代理*/
+//@ComponentScan
 public class ConcertConfig
 {
     // 声明Audience bean

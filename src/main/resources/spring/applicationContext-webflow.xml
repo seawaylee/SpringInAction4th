@@ -7,21 +7,21 @@ http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.spri
 
 
     <!--处理请求流程-->
-    <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
-        <property name="flowRegistry" ref="flowRegistry"/>
-    </bean>
+    <!--<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">-->
+        <!--<property name="flowRegistry" ref="flowRegistry"/>-->
+    <!--</bean>-->
 
-    <!--处理器-->
-    <bean class="org.springframework.webflow.mvc.portlet.FlowHandlerAdapter">
-        <property name="flowExecutor" ref="flowExecutor"/>
-    </bean>
+    <!--&lt;!&ndash;处理器&ndash;&gt;-->
+    <!--<bean class="org.springframework.webflow.mvc.portlet.FlowHandlerAdapter">-->
+        <!--<property name="flowExecutor" ref="flowExecutor"/>-->
+    <!--</bean>-->
 
-    <!--流程执行器-->
-    <flow:flow-executor id="flowExecutor"/>
+    <!--&lt;!&ndash;流程执行器&ndash;&gt;-->
+    <!--<flow:flow-executor id="flowExecutor"/>-->
 
-    <!--流程注册表-->
-    <flow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">
-        <flow:flow-location-pattern value="*-flow.xml"/>
-    </flow:flow-registry>
+    <!--&lt;!&ndash;流程注册表&ndash;&gt;-->
+    <!--<flow:flow-registry id="flowRegistry" base-path="/WEB-INF/flows">-->
+        <!--<flow:flow-location-pattern value="*-flow.xml"/>-->
+    <!--</flow:flow-registry>-->
 
 </beans>

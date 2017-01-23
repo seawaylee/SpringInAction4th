@@ -26,9 +26,9 @@ import java.util.List;
  * @author NikoBelic
  * @create 11/01/2017 15:32
  */
-@Configuration
-@EnableWebSecurity
-public cla SecurityConfig extends WebSecurityConfigurerAdapter
+//@Configuration
+//@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
     @Autowired
     DataSource dataSource;
