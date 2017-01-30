@@ -1,11 +1,15 @@
 package data_persistent.model;
 
+import java.io.Serializable;
+
 /**
  * @author NikoBelic
  * @create 22/01/2017 15:58
  */
-public class UserObj
+public class UserObj implements Serializable
 {
+    private static final long serialVersionUID = -5220639324096547958L;
+
     private Integer id;
     private String username;
     private String password;
@@ -14,10 +18,11 @@ public class UserObj
     public UserObj() {
     }
 
-    public UserObj(int id, String username, String password) {
+    public UserObj(int id, String username, String password,String role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -51,6 +56,8 @@ public class UserObj
     public void setRole(String role) {
         this.role = role;
     }
+
+
 
     @Override
     public String toString() {

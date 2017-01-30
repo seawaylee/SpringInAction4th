@@ -5,7 +5,9 @@ import data_persistent.config.RootConfig;
 import data_persistent.dao.UserDao;
 import data_persistent.document.CompanyDoc;
 import data_persistent.document.MemberDoc;
+import data_persistent.model.UserObj;
 import data_persistent.mongodao.CompanyRepo;
+import data_persistent.redisdao.KVDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import redis.clients.jedis.Jedis;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -37,18 +40,36 @@ public class PersistentTest
     @Autowired
     CompanyRepo companyRepo;
 
+    //@Autowired
+    //Jedis jedis;
+    @Autowired
+    KVDao kvDao;
+
     // ***************** JDBCTemplate *******************/
     @Test
     public void addUser()
     {
-        userDao.addUser();
-    }
-    @Test
-    public void findUser()
-    {
-        System.out.println(userDao.findUserById(1));
+        UserObj user = new UserObj();
+        user.setUsername("蛤蟆皮");
+        user.setPassword("123456");
+        user.setRole("ADMIN");
+        System.out.println(userDao.addUser(user));
     }
 
+    @Test
+    public void findUser() throws InterruptedException
+    {
+        System.out.println(userDao.findUserById(12));
+        Thread.sleep(11 * 1000);
+        System.out.println(userDao.findUserById(12));
+    }
+
+    @Test
+    public void updateUser()
+    {
+        UserObj userObj = new UserObj(1,"阿西吧","password","ABC");
+        userDao.updateUserById(1,userObj);
+    }
 
     // ***************** MongoDB *******************/
 
@@ -63,10 +84,10 @@ public class PersistentTest
         Collection<MemberDoc> members = new HashSet<>();
         for (int i = 0; i < 3; i++)
         {
-            members.add(new MemberDoc(i+1,"员工",(18+i) + "","码农" + (char)(97 + i)));
+            members.add(new MemberDoc(i + 1, "员工", (18 + i) + "", "码农" + (char) (97 + i)));
         }
         company.setMembers(members);
-        mongo.insert(company,"companys");
+        mongo.insert(company, "companys");
     }
 
     @Test
@@ -88,6 +109,35 @@ public class PersistentTest
     {
         List<CompanyDoc> companyDocs = mongo.find(Query.query(Criteria.where("companyName").regex("^犀牛*")), CompanyDoc.class, "companys");
         System.out.println(companyDocs);
+    }
+
+    // ***************** Redis Caching *******************/
+
+    @Test
+    public void redis_conn()
+    {
+        System.out.println(kvDao.get("chinese"));
+        kvDao.set("", "");
+        System.out.println(kvDao.get("chinese"));
+    }
+    @Test
+    public void test_cache()
+    {
+        System.out.println("Before Update...");
+        System.out.println(userDao.findUserById(1));
+        UserObj userObj = new UserObj(1,"Hey","密码","管理员");
+        userDao.updateUserById(userObj.getId(),userObj);
+        System.out.println("After Update...");
+        System.out.println(userDao.findUserById(1));
+    }
+    @Test
+    public void test_del_cache()
+    {
+        UserObj userObj = new UserObj(9,"Cache","密码","管理员");
+        userObj = userDao.addUser(userObj);
+        System.out.println(userDao.findUserById(userObj.getId()));
+        userDao.deleteUserById(userObj.getId());
+        System.out.println(userDao.findUserById(userObj.getId()));
     }
 
 }
