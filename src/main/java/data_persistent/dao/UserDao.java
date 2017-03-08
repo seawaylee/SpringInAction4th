@@ -14,7 +14,7 @@ public interface UserDao
     @CachePut(value = "UserCaching",key = "#result.id")
     UserObj addUser(UserObj userObj);
 
-    @Cacheable("UserCaching")
+    //@Cacheable("UserCaching")
     UserObj findUserById(Integer id);
 
     void updateUserById(Integer id,UserObj userObj);
