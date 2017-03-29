@@ -1,7 +1,6 @@
 package chapter02;
 
 import org.springframework.stereotype.Component;
-import sun.jvm.hotspot.tools.SysPropsDumper;
 
 /**
  * @author NikoBelic

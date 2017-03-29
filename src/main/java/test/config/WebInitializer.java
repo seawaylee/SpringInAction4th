@@ -1,4 +1,4 @@
-package data_persistent.config;
+package test.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
