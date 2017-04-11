@@ -1,9 +1,11 @@
 package mvc.config;
 
+import mvc.utils.MyFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
 
 /**
  * @author NikoBelic
@@ -15,6 +17,7 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
     /**
      * Spring上下文配置
      * ContextLoaderListener
+     *
      * @Author NikoBelic
      * @Date 09/01/2017 20:40
      */
@@ -26,6 +29,7 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
     /**
      * SpringMVC上下文配置
      * DisparcherServlet
+     *
      * @Author NikoBelic
      * @Date 09/01/2017 20:41
      */
@@ -36,6 +40,7 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
 
     /**
      * SpringMVC请求拦截,将DispatcherServlet映射到/
+     *
      * @Author NikoBelic
      * @Date 09/01/2017 20:41
      */
@@ -44,13 +49,23 @@ public class SpitterWebInitializer extends AbstractAnnotationConfigDispatcherSer
         return new String[]{"/"};
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        DelegatingFilterProxy testFilterChain = new DelegatingFilterProxy(new MyFilter());
+        return new Filter[]{characterEncodingFilter, testFilterChain};
+    }
+
     /**
      * 配置文件上传限制
+     *
      * @Author NikoBelic
      * @Date 09/01/2017 20:40
      */
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setMultipartConfig(new MultipartConfigElement("/Users/lixiwei-mac/Desktop/tmp",20971520, 41943040, 0));
+        registration.setMultipartConfig(new MultipartConfigElement("/Users/lixiwei-mac/Desktop/tmp", 20971520, 41943040, 0));
     }
 }
